@@ -1,0 +1,19 @@
+[project]
+name = "cardano-alert"
+version = "0.1.0"
+description = "Post a Slack message when Cardano reaches a certain price."
+readme = "README.md"
+requires-python = ">=3.10.11"
+dynamic = ["dependencies"]
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+pythonpath = [
+    'src',
+]

@@ -1,0 +1,10 @@
+Metadata-Version: 2.1
+Name: cardano-alert
+Version: 0.1.0
+Summary: Post a Slack message when Cardano reaches a certain price.
+Requires-Python: >=3.10.11
+Description-Content-Type: text/markdown
+Requires-Dist: matplotlib
+Requires-Dist: pydantic
+Requires-Dist: pyyaml
+Requires-Dist: slack_sdk

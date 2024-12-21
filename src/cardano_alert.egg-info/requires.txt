@@ -1,0 +1,4 @@
+matplotlib
+pydantic
+pyyaml
+slack_sdk

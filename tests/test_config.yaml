@@ -1,0 +1,3 @@
+deployment:
+  slack_token: "my-token"
+  slack_channel: "my-channel"
