@@ -1,7 +1,7 @@
 [project]
-name = "cardano-alert"
-version = "0.1.0"
-description = "Post a Slack message when Cardano reaches a certain price."
+name = "crypto-alert"
+version = "1.0.0"
+description = "Post a Slack message when the configured crypto reaches a certain price."
 readme = "README.md"
 requires-python = ">=3.10.11"
 dynamic = ["dependencies"]

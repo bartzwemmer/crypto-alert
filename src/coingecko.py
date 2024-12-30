@@ -67,7 +67,7 @@ class CoinGeckoAPI:
         # api_url = '{0}coins/{1}/market_chart?vs_currency={2}&days={3}'.format(self.api_base_url, id, vs_currency, days)
         # api_url = self.__api_url_params(api_url, kwargs, api_url_has_params=True)
         api_url = "{0}coins/{1}/market_chart".format(
-            self.api_base_url, id, vs_currency, days
+            self.api_base_url, id, 
         )
         kwargs["vs_currency"] = vs_currency
         kwargs["days"] = days

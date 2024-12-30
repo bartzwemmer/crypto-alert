@@ -11,22 +11,22 @@ CONFIG = read_config()
 # Initialize CoinGecko API client
 coinGecko = CoinGeckoAPI()
 # Get historical price data for Bitcoin
-ada_data = coinGecko.get_coin_market_chart_by_id("cardano", "eur", "365days")
+coin_data = coinGecko.get_coin_market_chart_by_id(CONFIG["deployment"]["coin"], "eur", "365days")
 # Validate response
-MarketChart.model_validate(ada_data)
+MarketChart.model_validate(coin_data)
 
-if ada_data["prices"][-1][1] > CONFIG["deployment"]["treshold"]:
-    pic_path = generate_chart(ada_data)
+if coin_data["prices"][-1][1] > CONFIG["deployment"]["treshold"]:
+    pic_path = generate_chart(CONFIG["deployment"]["coin"], coin_data)
     sc = SlackClient(CONFIG["deployment"]["slack_token"])
     att = [
         {
-            "text": f"Cardano prices for the past 24hr on {date.today()}",
+            "text": f"{CONFIG['deployment']['coin'].capitalize()} prices for the past 24hr on {date.today()}",
             "image_url": sc.get_image_attachment_url(pic_path),
         }
     ]
     sc.post_message(
         CONFIG["deployment"]["slack_channel"],
-        f"Cardano is above {CONFIG['deployment']['treshold']} EUR\n {att[0]['image_url']}",
+        f"{CONFIG['deployment']['coin'].capitalize()} is above {CONFIG['deployment']['treshold']} EUR\n {att[0]['image_url']}",
         image_attachment=att,
     )
     clean_up_chart(pic_path)

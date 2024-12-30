@@ -1,4 +1,6 @@
-matplotlib
-pydantic
-pyyaml
-slack_sdk
+matplotlib==3.9.2
+pydantic==2.10.2
+pytest==8.3.3
+pyyaml==6.0.2
+requests==2.32.3
+slack_sdk==3.33.4
