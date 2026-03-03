@@ -7,7 +7,7 @@ from typing import Any, Dict
 import matplotlib.pyplot as plt
 from yaml import safe_load
 
-from models import Config, MarketChart
+from .models import Config, MarketChart
 
 LOG = logging.getLogger(__name__)
 
@@ -54,11 +54,17 @@ def read_config(path: Path = Path("config.yaml")) -> Dict[str, Any]:
 
     if os.getenv("SLACK_TOKEN"):
         cfg["deployment"]["slack_token"] = os.getenv("SLACK_TOKEN")
-    else:
-        print("No SLACK_TOKEN found in env vars, using config file")
+    if os.getenv("SLACK_CHANNEL"):
+        cfg["deployment"]["slack_channel"] = os.getenv("SLACK_CHANNEL")
+    if os.getenv("COIN"):
+        cfg["deployment"]["coin"] = os.getenv("COIN")
+    if os.getenv("TRESHOLD"):
+        try:
+            cfg["deployment"]["treshold"] = float(os.getenv("TRESHOLD"))
+        except ValueError:
+            print(f"Invalid TRESHOLD value: {os.getenv('TRESHOLD')}, ignoring.")
 
     # Validate the config
     Config(**cfg)
 
-    # TODO extend by reading cfg from env vars and merge results
     return cfg

@@ -9,6 +9,7 @@ class MarketChart(BaseModel):
 
 
 class Deployment(BaseModel):
+    coin: str
     slack_token: str
     slack_channel: str
     treshold: int | float

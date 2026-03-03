@@ -3,7 +3,7 @@ name = "crypto-alert"
 version = "1.0.0"
 description = "Post a Slack message when the configured crypto reaches a certain price."
 readme = "README.md"
-requires-python = ">=3.10.11"
+requires-python = ">=3.10.0"
 dynamic = ["dependencies"]
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
