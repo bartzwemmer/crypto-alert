@@ -1,12 +1,14 @@
 from datetime import date
+import logging
 
-from coingecko import CoinGeckoAPI
-from helpers import generate_chart, read_config, clean_up_chart
-from models import MarketChart
-from slack_client import SlackClient
+from .coingecko import CoinGeckoAPI
+from .helpers import generate_chart, read_config, clean_up_chart
+from .models import MarketChart
+from .slack_client import SlackClient
 
 
 CONFIG = read_config()
+LOG = logging.getLogger(__name__)
 
 # Initialize CoinGecko API client
 coinGecko = CoinGeckoAPI()
@@ -30,3 +32,5 @@ if coin_data["prices"][-1][1] > CONFIG["deployment"]["treshold"]:
         image_attachment=att,
     )
     clean_up_chart(pic_path)
+else:
+    LOG.info(f"{CONFIG['deployment']['coin'].capitalize()} is below {CONFIG['deployment']['treshold']} EUR, no notification sent.")
