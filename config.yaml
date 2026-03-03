@@ -1,0 +1,6 @@
+crypto:
+  coin: "cardano"
+deployment:
+  slack_token: "slack access token"
+  slack_channel: "slack channel name"
+  treshold: 0.5 # treshold value in euro, will send notiification when price is above this value

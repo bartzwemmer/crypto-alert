@@ -1,5 +1,5 @@
 .venv/
-config.yaml
+# config.yaml
 __pycache__
 /output
 .vscode/

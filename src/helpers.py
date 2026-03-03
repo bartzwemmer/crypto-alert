@@ -62,7 +62,7 @@ def read_config(path: Path = Path("config.yaml")) -> Dict[str, Any]:
         try:
             cfg["deployment"]["treshold"] = float(os.getenv("TRESHOLD"))
         except ValueError:
-            print(f"Invalid TRESHOLD value: {os.getenv('TRESHOLD')}, ignoring.")
+            LOG.error(f"Invalid TRESHOLD value: {os.getenv('TRESHOLD')}, ignoring.")
 
     # Validate the config
     Config(**cfg)
