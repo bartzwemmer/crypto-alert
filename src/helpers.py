@@ -60,7 +60,7 @@ def read_config(path: Path = Path("config.yaml")) -> Dict[str, Any]:
         cfg["deployment"]["coin"] = os.getenv("COIN")
     if os.getenv("TRESHOLD"):
         try:
-            cfg["deployment"]["treshold"] = float(os.getenv("TRESHOLD"))
+            cfg["deployment"]["treshold"] = float(os.getenv("TRESHOLD", 0.5))
         except ValueError:
             LOG.error(f"Invalid TRESHOLD value: {os.getenv('TRESHOLD')}, ignoring.")
 
