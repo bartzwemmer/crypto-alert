@@ -1,14 +1,11 @@
 from datetime import date
-import logging
 
-from .coingecko import CoinGeckoAPI
-from .helpers import generate_chart, read_config, clean_up_chart
-from .models import MarketChart
-from .slack_client import SlackClient
-
+from coingecko import CoinGeckoAPI
+from helpers import generate_chart, read_config, clean_up_chart
+from models import MarketChart
+from slack_client import SlackClient
 
 CONFIG = read_config()
-LOG = logging.getLogger(__name__)
 
 # Initialize CoinGecko API client
 coinGecko = CoinGeckoAPI()
@@ -17,7 +14,7 @@ coin_data = coinGecko.get_coin_market_chart_by_id(CONFIG["deployment"]["coin"], 
 # Validate response
 MarketChart.model_validate(coin_data)
 
-if coin_data["prices"][-1][1] > CONFIG["deployment"]["treshold"]:
+if coin_data["prices"][-1][1] > CONFIG["deployment"]["threshold"]:
     pic_path = generate_chart(CONFIG["deployment"]["coin"], coin_data)
     sc = SlackClient(CONFIG["deployment"]["slack_token"])
     att = [
@@ -28,9 +25,10 @@ if coin_data["prices"][-1][1] > CONFIG["deployment"]["treshold"]:
     ]
     sc.post_message(
         CONFIG["deployment"]["slack_channel"],
-        f"{CONFIG['deployment']['coin'].capitalize()} is above {CONFIG['deployment']['treshold']} EUR\n {att[0]['image_url']}",
+        f"{CONFIG['deployment']['coin'].capitalize()} is above {CONFIG['deployment']['threshold']} EUR\n {att[0]['image_url']}",
         image_attachment=att,
     )
     clean_up_chart(pic_path)
+    print(f"{CONFIG['deployment']['coin'].capitalize()} is above {CONFIG['deployment']['threshold']:.2f} EUR, notification sent.")
 else:
-    LOG.info(f"{CONFIG['deployment']['coin'].capitalize()} is below {CONFIG['deployment']['treshold']} EUR, no notification sent.")
+    print(f"{CONFIG['deployment']['coin'].capitalize()} is below {CONFIG['deployment']['threshold']:.2f} EUR, no notification sent.")

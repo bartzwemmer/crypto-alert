@@ -11,7 +11,7 @@ crypto:
 deployment:
   slack_token: "slack access token"
   slack_channel: "slack channel name"
-  treshold: 0.5 # treshold value in euro, will send notiification when price is above this value
+  threshold: 0.5 # threshold value in euro, will send notiification when price is above this value
 ```
 ### Environment variables
 To offer a safe way of providing confidential information, the slack token can be provided as an environment variable:

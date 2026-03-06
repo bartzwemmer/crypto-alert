@@ -7,7 +7,7 @@ from typing import Any, Dict
 import matplotlib.pyplot as plt
 from yaml import safe_load
 
-from .models import Config, MarketChart
+from models import Config, MarketChart
 
 LOG = logging.getLogger(__name__)
 
@@ -58,11 +58,11 @@ def read_config(path: Path = Path("config.yaml")) -> Dict[str, Any]:
         cfg["deployment"]["slack_channel"] = os.getenv("SLACK_CHANNEL")
     if os.getenv("COIN"):
         cfg["deployment"]["coin"] = os.getenv("COIN")
-    if os.getenv("TRESHOLD"):
+    if os.getenv("THRESHOLD"):
         try:
-            cfg["deployment"]["treshold"] = float(os.getenv("TRESHOLD", 0.5))
+            cfg["deployment"]["threshold"] = float(os.getenv("THRESHOLD", 0.5))
         except ValueError:
-            LOG.error(f"Invalid TRESHOLD value: {os.getenv('TRESHOLD')}, ignoring.")
+            LOG.error(f"Invalid THRESHOLD value: {os.getenv('THRESHOLD')}, ignoring.")
 
     # Validate the config
     Config(**cfg)

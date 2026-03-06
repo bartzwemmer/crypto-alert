@@ -73,3 +73,7 @@ class CoinGeckoAPI:
         kwargs["days"] = days
 
         return self.__request(api_url, kwargs)
+
+if __name__ == "__main__":
+    cg = CoinGeckoAPI() 
+    print(cg.get_coin_market_chart_by_id("cardano", "eur", "365days"))

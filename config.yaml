@@ -3,4 +3,4 @@ crypto:
 deployment:
   slack_token: "slack access token"
   slack_channel: "slack channel name"
-  treshold: 0.5 # treshold value in euro, will send notiification when price is above this value
+  threshold: 0.05 # threshold value in euro, will send notification when price is above this value
