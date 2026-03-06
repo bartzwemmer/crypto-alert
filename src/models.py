@@ -12,7 +12,7 @@ class Deployment(BaseModel):
     coin: str
     slack_token: str
     slack_channel: str
-    treshold: int | float
+    threshold: int | float
 
 
 class Config(BaseModel):
